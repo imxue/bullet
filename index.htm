@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Layout</title>
+ 	<style type="text/css">
+ 		* {
+  box-sizing: border-box;
+}
+html,body{
+  margin:0;
+  padding:0;
+  
+}
+.screen{
+  position: relative;
+  border:1px solid rgb(229,229,229);
+  height:280px;
+  margin:20px;
+  overflow: hidden;
+}
+.dum{
+  position: absolute;
+  right:-10px;
+  white-space:nowrap;
+}
+.dum:hover{
+ font-size: 24px;
+}
+.operate{
+	text-align: center;
+}
+.txt{
+	margin-bottom: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 80px;
+	border-radius: 3px;
+    border: 1px solid rgb(204, 204, 204);
+}
+.send{
+	border-radius: 3px;
+    color: red;
+    padding: 5px 30px;
+    border: 1px solid rgb(229,229,229);
+    background: white;
+}
+ </style>
+</head>
+<body>
+<div class="screen">
+</div>
+<div class="operate">
+	<div>
+		<input class='txt' type="text">
+	</div>
+	<button class="send">发射</button>
+	<button class="send">发射</button>
+</div>
+<script src="./jquery.js"></script>
+<script type="text/javascript">
+	var dumarray = []
+	$('.send').on("click",() => {
+		var x = $('.txt').val()
+		dumarray.push(x)
+		var height = $('.screen').outerHeight() -21
+		height = Math.floor(Math.random() * height)
+		var r = Math.floor(Math.random() * 255)
+		var g = Math.floor(Math.random() * 255)
+		var b = Math.floor(Math.random() * 255)
+		var textOjb = $("<span class=dum style=top:"+height+"px;color:rgb("+r+","+g+","+b+")>"+ x +"</span>")
+	   $('.screen').append(textOjb)
+	   var width = $('.screen').width()
+	  
+	textOjb.animate({
+		right:+ width + 'px',
+	},8000,() => {
+		textOjb.remove();
+	})
+
+	textOjb.on("mouseover",() => {
+		textOjb.stop();
+	})
+	textOjb.on("mouseout",() => {
+		textOjb.animate({
+		right:+ width + 'px',
+	},8000,() => {
+		textOjb.remove();
+	})
+	})
+	})
+
+	
+</script>
+</body>
+</html>
